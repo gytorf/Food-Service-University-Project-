@@ -1,16 +1,48 @@
 const MENU = [
-  { id: 1, cat: "Перші страви", name: "Борщ український", desc: "З пампушками та часниковою підливою", price: 95, emoji: "🍲" },
-  { id: 2, cat: "Перші страви", name: "Солянка", desc: "Наваристий м'ясний суп зі сметаною", price: 105, emoji: "🥘" },
-  { id: 3, cat: "Перші страви", name: "Крем-суп із гарбуза", desc: "З грінками та насінням гарбуза", price: 89, emoji: "🎃" },
-  { id: 4, cat: "Другі страви", name: "Деруни зі сметаною", desc: "Хрумкі картопляні деруни, 6 шт", price: 78, emoji: "🥔" },
-  { id: 5, cat: "Другі страви", name: "Котлета по-київськи", desc: "З картопляним пюре та овочами", price: 149, emoji: "🍗" },
-  { id: 6, cat: "Другі страви", name: "Вареники з вишнею", desc: "12 шт, подаються зі сметаною", price: 99, emoji: "🍒" },
-  { id: 7, cat: "Салати", name: "Олів'є", desc: "Класичний салат з ковбасою", price: 65, emoji: "🥗" },
-  { id: 8, cat: "Салати", name: "Грецький салат", desc: "Свіжі овочі та сир фета", price: 79, emoji: "🥒" },
-  { id: 9, cat: "Напої", name: "Узвар", desc: "Компот із сухофруктів, 400 мл", price: 39, emoji: "🍎" },
-  { id: 10, cat: "Напої", name: "Морс журавлинний", desc: "Домашній морс, 400 мл", price: 42, emoji: "🧃" },
-  { id: 11, cat: "Десерти", name: "Медовик", desc: "Класичний медовий торт, шматок", price: 68, emoji: "🍰" },
-  { id: 12, cat: "Десерти", name: "Сирники", desc: "Зі згущеним молоком, 3 шт", price: 72, emoji: "🧀" },
+  { id: 1, cat: "Салати", name: "Цезар з куркою", weight: "220 г", price: 165, img: "img/salad/salad1.webp" },
+  { id: 2, cat: "Салати", name: "Грецький салат", weight: "200 г", price: 135, img: "img/salad/salad2.webp" },
+  { id: 3, cat: "Салати", name: "Салат з тунцем", weight: "210 г", price: 175, img: "img/salad/salad3.webp" },
+  { id: 4, cat: "Салати", name: "Овочевий салат", weight: "200 г", price: 95, img: "img/salad/salad4.webp" },
+  { id: 5, cat: "Салати", name: "Салат з креветками", weight: "200 г", price: 195, img: "img/salad/salad5.webp" },
+  { id: 6, cat: "Салати", name: "Вітамінний салат", weight: "180 г", price: 105, img: "img/salad/salad6.webp" },
+  { id: 7, cat: "Салати", name: "Салат Капрезе", weight: "190 г", price: 145, img: "img/salad/salad7.webp" },
+  { id: 8, cat: "Салати", name: "Салат з куркою і ананасом", weight: "210 г", price: 155, img: "img/salad/salad8.webp" },
+
+  { id: 9, cat: "Піца", name: "Маргарита", weight: "450 г", price: 185, img: "img/pizza/pizza1.webp" },
+  { id: 10, cat: "Піца", name: "Пепероні", weight: "450 г", price: 215, img: "img/pizza/pizza2.webp" },
+  { id: 11, cat: "Піца", name: "Чотири сири", weight: "450 г", price: 225, img: "img/pizza/pizza3.webp" },
+  { id: 12, cat: "Піца", name: "Гавайська", weight: "450 г", price: 205, img: "img/pizza/pizza4.webp" },
+  { id: 13, cat: "Піца", name: "Барбекю з куркою", weight: "470 г", price: 220, img: "img/pizza/pizza5.webp" },
+  { id: 14, cat: "Піца", name: "Вегетаріанська", weight: "450 г", price: 195, img: "img/pizza/pizza6.webp" },
+  { id: 15, cat: "Піца", name: "М'ясна", weight: "480 г", price: 235, img: "img/pizza/pizza7.webp" },
+  { id: 16, cat: "Піца", name: "Баварезе", weight: "600 г", price: 260, img: "img/pizza/pizza8.webp" },
+
+  { id: 17, cat: "Суші", name: "Філадельфія", weight: "260 г", price: 245, img: "img/sushi/sushi1.webp" },
+  { id: 18, cat: "Суші", name: "Каліфорнія", weight: "250 г", price: 225, img: "img/sushi/sushi2.webp" },
+  { id: 19, cat: "Суші", name: "Дракон", weight: "270 г", price: 265, img: "img/sushi/sushi3.webp" },
+  { id: 20, cat: "Суші", name: "Суші з лососем", weight: "255 г", price: 235, img: "img/sushi/sushi4.webp" },
+  { id: 21, cat: "Суші", name: "Унагі маки", weight: "180 г", price: 195, img: "img/sushi/sushi5.webp" },
+  { id: 22, cat: "Суші", name: "Сет Токіо", weight: "620 г", price: 450, img: "img/sushi/sushi6.webp" },
+  { id: 23, cat: "Суші", name: "Сет Осака", weight: "700 г", price: 520, img: "img/sushi/sushi7.webp" },
+  { id: 24, cat: "Суші", name: "Темпура ролл", weight: "230 г", price: 210, img: "img/sushi/sushi8.webp" },
+
+  { id: 25, cat: "Десерти", name: "Тірамісу", weight: "150 г", price: 125, img: "img/desert/desert1.webp" },
+  { id: 26, cat: "Десерти", name: "Чізкейк Нью-Йорк", weight: "150 г", price: 130, img: "img/desert/desert2.webp" },
+  { id: 27, cat: "Десерти", name: "Шоколадний фондан", weight: "140 г", price: 135, img: "img/desert/desert3.webp" },
+  { id: 28, cat: "Десерти", name: "Медовик", weight: "150 г", price: 110, img: "img/desert/desert4.webp" },
+  { id: 29, cat: "Десерти", name: "Панна-котта", weight: "130 г", price: 115, img: "img/desert/desert5.webp" },
+  { id: 30, cat: "Десерти", name: "Брауні з морозивом", weight: "160 г", price: 120, img: "img/desert/desert6.webp" },
+  { id: 31, cat: "Десерти", name: "Наполеон", weight: "150 г", price: 115, img: "img/desert/desert7.webp" },
+  { id: 32, cat: "Десерти", name: "Київський торт", weight: "200 г", price: 110, img: "img/desert/desert8.webp" },
+
+  { id: 33, cat: "Супи", name: "Борщ український", weight: "300 г", price: 95, img: "img/soup/soup1.webp" },
+  { id: 34, cat: "Супи", name: "Крем-суп грибний", weight: "300 г", price: 105, img: "img/soup/soup2.webp" },
+  { id: 35, cat: "Супи", name: "Том Ям з креветками", weight: "300 г", price: 165, img: "img/soup/soup3.webp" },
+  { id: 36, cat: "Супи", name: "Солянка", weight: "300 г", price: 115, img: "img/soup/soup4.webp" },
+  { id: 37, cat: "Супи", name: "Суп-пюре гарбузовий", weight: "300 г", price: 95, img: "img/soup/soup5.webp" },
+  { id: 38, cat: "Супи", name: "Курячий бульйон з локшиною", weight: "300 г", price: 85, img: "img/soup/soup6.webp" },
+  { id: 39, cat: "Супи", name: "Харчо", weight: "300 г", price: 110, img: "img/soup/soup7.webp" },
+  { id: 40, cat: "Супи", name: "М'ясна солянка", weight: "300 г", price: 95, img: "img/soup/soup8.webp" },
 ];
 
 const DELIVERY_FEE = 39;
@@ -70,9 +102,11 @@ function renderMenu() {
   const dishes = activeCat === "Усі" ? MENU : MENU.filter(d => d.cat === activeCat);
   grid.innerHTML = dishes.map(d => `
     <article class="dish">
-      <span class="dish__emoji">${d.emoji}</span>
+      <div class="dish__imgwrap">
+        <img class="dish__img" src="${d.img}" alt="${d.name}" loading="lazy">
+        <span class="dish__weight">${d.weight}</span>
+      </div>
       <h3 class="dish__name">${d.name}</h3>
-      <p class="dish__desc">${d.desc}</p>
       <div class="dish__footer">
         <span class="dish__price">${d.price} ₴</span>
         <button class="dish__add" data-id="${d.id}" aria-label="Додати ${d.name} до кошика">+</button>
@@ -102,7 +136,7 @@ function renderCart() {
       const dish = MENU.find(d => d.id === Number(id));
       return `
         <li class="cart__item">
-          <span class="cart__item-name">${dish.name}</span>
+          <span class="cart__item-name">${dish.name} <span class="cart__item-weight">(${dish.weight})</span></span>
           <span class="cart__qty">
             <button data-id="${id}" data-delta="-1" aria-label="Зменшити">−</button>
             <span>${qty}</span>

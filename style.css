@@ -121,9 +121,19 @@ a{color:inherit;}
   background:#fff; border:1px solid var(--line); border-radius:4px; padding:1.2rem;
   display:flex; flex-direction:column; gap:.5rem;
 }
-.dish__emoji{font-size:2.2rem;}
-.dish__name{font-family:var(--font-display); font-size:1.05rem; text-transform:none; letter-spacing:0;}
-.dish__desc{font-size:.85rem; color:#7a7063; flex:1;}
+.dish__imgwrap{position:relative; margin:-1.2rem -1.2rem .3rem; overflow:hidden; border-radius:4px 4px 0 0;}
+.dish__img{
+  width:100%; aspect-ratio:1/1; object-fit:cover; display:block;
+  transition:transform .25s ease;
+}
+.dish:hover .dish__img{transform:scale(1.05);}
+.dish__weight{
+  position:absolute; bottom:.5rem; right:.5rem;
+  background:rgba(43,36,32,.75); color:var(--paper);
+  font-family:var(--font-display); font-size:.72rem; letter-spacing:.03em;
+  padding:.2rem .5rem; border-radius:2px;
+}
+.dish__name{font-family:var(--font-display); font-size:1.05rem; text-transform:none; letter-spacing:0; flex:1;}
 .dish__footer{display:flex; align-items:center; justify-content:space-between; margin-top:.4rem;}
 .dish__price{font-weight:600;}
 .dish__add{
@@ -163,6 +173,7 @@ a{color:inherit;}
 .cart__list{list-style:none; margin:0; padding:0; font-family:'Courier New', monospace;}
 .cart__item{display:flex; align-items:center; justify-content:space-between; padding:.6rem 0; border-bottom:1px dashed var(--line); gap:.5rem;}
 .cart__item-name{flex:1; font-size:.85rem;}
+.cart__item-weight{color:#9a9184; font-size:.78rem;}
 .cart__qty{display:flex; align-items:center; gap:.4rem;}
 .cart__qty button{width:24px; height:24px; border:1px solid var(--line); background:#fff; cursor:pointer; border-radius:2px;}
 .cart__item-price{width:60px; text-align:right; font-size:.85rem;}
