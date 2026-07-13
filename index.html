@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пательня — замовлення їжі онлайн</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="#" class="brand">
+      <span class="brand__mark">🍳</span>
+      <span class="brand__text">Пательня</span>
+    </a>
+    <nav class="topbar__nav">
+      <a href="#menu">Меню</a>
+      <a href="#how">Як це працює</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <button class="cart-toggle" id="cartToggle" aria-label="Відкрити кошик">
+      🧾 <span id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">Домашня кухня · сьогодні · до дверей</p>
+    <h1 class="hero__title">Готуємо гаряче.<br>Довозимо швидко.</h1>
+    <p class="hero__sub">Обери страви з меню — кожне замовлення складається у твій особистий чек, як на справжній кухні.</p>
+    <a href="#menu" class="btn btn--primary">Дивитись меню ↓</a>
+  </div>
+  <div class="hero__ticket" aria-hidden="true">
+    <div class="ticket-preview">
+      <p class="ticket-preview__line">№014</p>
+      <p class="ticket-preview__line">Борщ український .......... 1</p>
+      <p class="ticket-preview__line">Деруни зі сметаною ........ 2</p>
+      <p class="ticket-preview__line">Узвар ...................... 1</p>
+      <p class="ticket-preview__total">Разом: 342 ₴</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="menu__header">
+    <h2>Меню</h2>
+    <div class="menu__tabs" id="menuTabs"></div>
+  </div>
+  <div class="menu__grid" id="menuGrid"></div>
+</section>
+
+<section class="how" id="how">
+  <h2>Як це працює</h2>
+  <ol class="how__steps">
+    <li><span class="how__num">1</span><p>Додай страви до чека — кожен клік чути й видно.</p></li>
+    <li><span class="how__num">2</span><p>Перевір замовлення в кошику та вкажи адресу.</p></li>
+    <li><span class="how__num">3</span><p>Підтверди — і кухня береться до роботи.</p></li>
+  </ol>
+</section>
+
+<footer id="contacts" class="footer">
+  <p>Пательня · навчальний проєкт · вул. Кулінарна, 1, Рівне</p>
+  <p>+38 (000) 000-00-00 · hello@patelnya.ua</p>
+</footer>
+
+<aside class="cart" id="cart" aria-hidden="true">
+  <div class="cart__header">
+    <h2>Твій чек</h2>
+    <button class="cart__close" id="cartClose" aria-label="Закрити кошик">✕</button>
+  </div>
+  <div class="cart__body" id="cartBody">
+    <p class="cart__empty" id="cartEmpty">Чек поки порожній. Обери щось смачне з меню.</p>
+    <ul class="cart__list" id="cartList"></ul>
+  </div>
+  <div class="cart__footer">
+    <div class="cart__total-row">
+      <span>Разом</span>
+      <span id="cartTotal">0 ₴</span>
+    </div>
+    <button class="btn btn--primary btn--full" id="checkoutBtn" disabled>Оформити замовлення</button>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+
+<div class="modal" id="checkoutModal" aria-hidden="true">
+  <div class="modal__box">
+    <button class="modal__close" id="modalClose" aria-label="Закрити">✕</button>
+    <h2>Оформлення замовлення</h2>
+    <form id="checkoutForm">
+      <label>Ім'я
+        <input type="text" name="name" required placeholder="Тарас Шевченко">
+      </label>
+      <label>Телефон
+        <input type="tel" name="phone" required placeholder="+380 XX XXX XX XX">
+      </label>
+      <label>Адреса доставки
+        <input type="text" name="address" required placeholder="вул. Соборна, 12, кв. 5">
+      </label>
+      <label>Коментар до замовлення
+        <textarea name="comment" placeholder="Наприклад: подзвонити перед приходом"></textarea>
+      </label>
+      <div class="modal__total">До сплати: <strong id="modalTotal">0 ₴</strong></div>
+      <button type="submit" class="btn btn--primary btn--full">Підтвердити замовлення</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="successModal" aria-hidden="true">
+  <div class="modal__box modal__box--success">
+    <p class="success__ticket-num">№ <span id="orderNumber">014</span></p>
+    <h2>Замовлення прийнято!</h2>
+    <p>Кухня вже готує твоє замовлення. Орієнтовний час доставки — 40–55 хв.</p>
+    <button class="btn btn--primary" id="successClose">Чудово, дякую</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
