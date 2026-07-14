@@ -1,4 +1,4 @@
-const MENU = [
+const RAW_MENU = [
   { id: 1, cat: "Салати", name: "Цезар з куркою", weight: "220 г", price: 165, img: "img/salad/salad1.webp" },
   { id: 2, cat: "Салати", name: "Грецький салат", weight: "200 г", price: 135, img: "img/salad/salad2.webp" },
   { id: 3, cat: "Салати", name: "Салат з тунцем", weight: "210 г", price: 175, img: "img/salad/salad3.webp" },
@@ -45,6 +45,36 @@ const MENU = [
   { id: 40, cat: "Супи", name: "М'ясна солянка", weight: "300 г", price: 95, img: "img/soup/soup8.webp" },
 ];
 
+// ---------- Характеристики за категорією ----------
+// Базові дані для генерації калорійності/складу/алергенів кожного товару.
+// Значення орієнтовні (для навчального проєкту), калорійність варіюється
+// в межах діапазону залежно від ваги страви.
+const CATEGORY_INFO = {
+  "Салати": { calRange: [90, 260], ingredients: "свіжі овочі, зелень, заправка", allergens: "може містити яйця, лактозу" },
+  "Піца": { calRange: [650, 980], ingredients: "тісто, томатний соус, сир моцарела, начинка за рецептом", allergens: "глютен, лактоза" },
+  "Суші": { calRange: [280, 560], ingredients: "рис, норі, риба/морепродукти, овочі, соус", allergens: "риба, соя, кунжут" },
+  "Десерти": { calRange: [320, 480], ingredients: "борошно, цукор, вершкове масло/вершки, яйця", allergens: "глютен, яйця, лактоза" },
+  "Супи": { calRange: [140, 320], ingredients: "бульйон, овочі, м'ясо/крупи за рецептом", allergens: "може містити глютен, селеру" },
+};
+
+function enrichWithCharacteristics(menu) {
+  return menu.map((item) => {
+    const info = CATEGORY_INFO[item.cat] || { calRange: [150, 400], ingredients: "уточнюйте у кухні", allergens: "уточнюйте у кухні" };
+    const [min, max] = info.calRange;
+    // Детермінований "розкид" калорійності в межах діапазону категорії, залежно від id страви
+    const spread = (item.id * 37) % 100 / 100; // 0..0.99, стабільне для кожного id
+    const calories = Math.round(min + (max - min) * spread);
+    return {
+      ...item,
+      calories,
+      ingredients: info.ingredients,
+      allergens: info.allergens,
+    };
+  });
+}
+
+const MENU = enrichWithCharacteristics(RAW_MENU);
+
 const DELIVERY_FEE = 39;
 
 let cart = JSON.parse(localStorage.getItem("patelnya_cart") || "{}");
@@ -52,6 +82,7 @@ let activeCat = "Усі";
 
 function saveCart() {
   localStorage.setItem("patelnya_cart", JSON.stringify(cart));
+  DB.saveCurrentOrder(cart).catch((err) => console.error("Не вдалося зберегти поточне замовлення в БД:", err));
 }
 
 function cartItemsCount() {
@@ -198,6 +229,45 @@ document.getElementById("checkoutForm").addEventListener("submit", (e) => {
   const orderNumber = String(Math.floor(Math.random() * 900) + 100);
   document.getElementById("orderNumber").textContent = orderNumber;
 
+  const formData = new FormData(e.target);
+  const total = cartTotal() + DELIVERY_FEE;
+
+  const orderItems = Object.entries(cart)
+    .filter(([, qty]) => qty > 0)
+    .map(([id, qty]) => {
+      const dish = MENU.find((d) => d.id === Number(id));
+      return {
+        id: dish.id,
+        name: dish.name,
+        cat: dish.cat,
+        weight: dish.weight,
+        price: dish.price,
+        qty,
+        subtotal: dish.price * qty,
+        calories: dish.calories,
+        ingredients: dish.ingredients,
+        allergens: dish.allergens,
+      };
+    });
+
+  const order = {
+    orderNumber,
+    createdAt: new Date().toISOString(),
+    customer: {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      address: formData.get("address"),
+      comment: formData.get("comment") || "",
+    },
+    items: orderItems,
+    deliveryFee: DELIVERY_FEE,
+    total,
+    status: "прийнято",
+  };
+
+  DB.saveOrder(order).catch((err) => console.error("Не вдалося зберегти замовлення в БД:", err));
+  DB.clearCurrentOrder().catch((err) => console.error("Не вдалося очистити поточне замовлення в БД:", err));
+
   cart = {};
   saveCart();
   renderCart();
@@ -207,6 +277,10 @@ document.getElementById("checkoutForm").addEventListener("submit", (e) => {
   e.target.reset();
 });
 
+// ---------- Ініціалізація ----------
 renderTabs();
 renderMenu();
 renderCart();
+
+DB.seedProductsIfEmpty(MENU).catch((err) => console.error("Не вдалося записати каталог товарів у БД:", err));
+DB.saveCurrentOrder(cart).catch((err) => console.error("Не вдалося зберегти поточне замовлення в БД:", err));

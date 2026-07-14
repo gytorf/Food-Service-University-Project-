@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пательня — Адмін-панель (перегляд даних)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">🍳</span>
+      <span class="brand__text">Пательня</span>
+    </a>
+    <nav class="topbar__nav">
+      <a href="index.html">← На сайт</a>
+    </nav>
+  </div>
+</header>
+
+<main class="admin">
+  <h1 class="admin__title">Адмін-панель · дані бази (IndexedDB)</h1>
+  <p class="admin__hint">Ці дані зберігаються локально у браузері користувача (IndexedDB), нічого не надсилається на сервер.</p>
+
+  <section class="admin__section">
+    <h2>Поточне замовлення (кошик)</h2>
+    <div id="currentOrderBox" class="admin__box">Завантаження…</div>
+  </section>
+
+  <section class="admin__section">
+    <div class="admin__section-header">
+      <h2>Історія замовлень</h2>
+      <span id="ordersCount" class="admin__count"></span>
+    </div>
+    <div id="ordersBox" class="admin__box">Завантаження…</div>
+  </section>
+
+  <section class="admin__section">
+    <div class="admin__section-header">
+      <h2>Каталог товарів і характеристики</h2>
+      <span id="productsCount" class="admin__count"></span>
+    </div>
+    <div class="admin__filters" id="productFilters"></div>
+    <div id="productsBox" class="admin__box">Завантаження…</div>
+  </section>
+</main>
+
+<script src="db.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
