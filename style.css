@@ -127,20 +127,25 @@ a{color:inherit;}
   transition:transform .25s ease;
 }
 .dish:hover .dish__img{transform:scale(1.05);}
-.dish__weight{
+.dish__badges{
   position:absolute; bottom:.5rem; right:.5rem;
+  display:flex; align-items:center; gap:.35rem;
+}
+.dish__weight{
   background:rgba(43,36,32,.75); color:var(--paper);
   font-family:var(--font-display); font-size:.72rem; letter-spacing:.03em;
-  padding:.2rem .5rem; border-radius:2px;
+  padding:.2rem .5rem; border-radius:2px; white-space:nowrap;
 }
 .dish__name{font-family:var(--font-display); font-size:1.05rem; text-transform:none; letter-spacing:0; flex:1;}
 .dish__footer{display:flex; align-items:center; justify-content:space-between; margin-top:.4rem;}
 .dish__price{font-weight:600;}
 .dish__add{
   background:var(--basil); color:#fff; border:none; border-radius:2px;
-  width:32px; height:32px; font-size:1.2rem; cursor:pointer; line-height:1;
+  width:36px; height:36px; font-size:1.05rem; cursor:pointer; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, transform .15s ease;
 }
-.dish__add:hover{background:#375132;}
+.dish__add:hover{background:#375132; transform:translateY(-1px);}
 
 .how{background:var(--paper-dark); padding:3.5rem 1.5rem;}
 .how h2{max-width:1100px; margin:0 auto 2rem; font-size:2rem;}
@@ -202,9 +207,131 @@ a{color:inherit;}
 .modal__box--success{text-align:center;}
 .success__ticket-num{font-family:'Courier New', monospace; color:var(--tomato); font-size:1.1rem; margin-bottom:.2rem;}
 
+/* ---------- Модалка товару: розмір + інгредієнти ---------- */
+.product-modal__box{
+  display:flex;
+  width:100%; max-width:760px;
+  max-height:88vh;
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+.product-modal__close{
+  position:absolute; top:.9rem; right:.9rem; z-index:3;
+  width:32px; height:32px; border-radius:50%;
+  background:rgba(255,255,255,.92); box-shadow:0 2px 6px rgba(0,0,0,.12);
+  display:flex; align-items:center; justify-content:center;
+  border:none; cursor:pointer;
+}
+.product-modal__image{
+  flex:0 0 40%;
+  position:relative;
+  background:var(--paper-dark);
+  min-width:200px;
+}
+.product-modal__image img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.product-modal__info{
+  flex:1;
+  min-width:0;
+  padding:2rem 2rem 1.6rem;
+  background:#fff;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+}
+.product-modal__cat{
+  font-family:var(--font-display); font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--tomato); margin:0; font-weight:500;
+}
+.product-modal__name{
+  font-size:1.5rem; text-transform:none; letter-spacing:0; margin:0; line-height:1.2;
+  color:var(--charcoal);
+}
+
+.product-modal__sizes{display:flex; gap:.6rem;}
+.size-pill{
+  flex:1;
+  display:flex; flex-direction:column; align-items:center; gap:.25rem;
+  border:1px solid var(--line); background:#fff; border-radius:6px;
+  padding:.7rem .5rem; cursor:pointer; font-family:var(--font-body);
+  transition:border-color .15s ease, background .15s ease;
+}
+.size-pill:hover{border-color:#b8ab8f;}
+.size-pill.active{border-color:var(--tomato); background:rgba(193,57,43,.05);}
+.size-pill__label{font-family:var(--font-display); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:#8a7d68;}
+.size-pill.active .size-pill__label{color:var(--tomato);}
+.size-pill__weight{font-size:.8rem; color:#6b5f4f; margin-top:.05rem;}
+.size-pill__price{font-weight:600; font-size:.95rem; margin-top:.15rem; color:var(--charcoal);}
+
+.product-modal__meta{margin:0; display:grid; gap:.65rem; font-size:.86rem;}
+.product-modal__meta div{
+  display:flex; justify-content:space-between; gap:1.2rem;
+  border-bottom:1px solid var(--line); padding-bottom:.5rem;
+}
+.product-modal__meta dt{color:#8a7d68; font-weight:500; flex:0 0 auto;}
+.product-modal__meta dd{margin:0; text-align:right; color:var(--charcoal);}
+
+.product-modal__footer{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  margin-top:auto; padding-top:1rem; border-top:1px solid var(--line);
+}
+.product-modal__price{font-family:var(--font-display); font-size:1.4rem; color:var(--charcoal);}
+#productModalAdd{transition:background .15s ease, transform .15s ease;}
+#productModalAdd.added{background:var(--basil);}
+
+@media (max-width:700px){
+  .modal{padding:0;}
+  .product-modal__box{
+    flex-direction:column; max-height:100vh; height:100%;
+    border-radius:0; max-width:100%;
+  }
+  .product-modal__image{flex:0 0 42vw; min-width:0; max-height:280px;}
+  .product-modal__info{padding:1.3rem 1.1rem 1.1rem; gap:1rem;}
+  .product-modal__name{font-size:1.25rem;}
+  .product-modal__sizes{gap:.5rem;}
+  .size-pill{padding:.6rem .35rem;}
+  .size-pill__label{font-size:.68rem;}
+  .size-pill__weight{font-size:.74rem;}
+  .size-pill__price{font-size:.88rem;}
+  .product-modal__meta{font-size:.82rem; gap:.5rem;}
+  .product-modal__meta div{gap:.7rem;}
+  .product-modal__footer{
+    position:sticky; bottom:0; background:#fff; margin-top:auto;
+    padding:.9rem 0 .2rem;
+  }
+  .product-modal__price{font-size:1.2rem;}
+  #productModalAdd{flex:0 0 auto; padding:.8rem 1.2rem; font-size:.82rem;}
+}
+
+@media (max-width:420px){
+  .product-modal__image{flex-basis:36vw; max-height:220px;}
+  .product-modal__info{padding:1.1rem .9rem 1rem;}
+}
+
 @media (max-width:800px){
   .hero{grid-template-columns:1fr; text-align:center;}
   .hero__title{font-size:2.2rem;}
   .hero__ticket{order:-1;}
   .how__steps{grid-template-columns:1fr;}
+}
+
+@media (max-width:640px){
+  .topbar__inner{padding:.8rem 1rem;}
+  .topbar__nav{display:none;}
+  .brand__text{font-size:1.15rem;}
+  .cart-toggle{padding:.5rem .8rem; font-size:.9rem;}
+  .menu{padding:1.6rem 1rem 3rem;}
+  .menu__header h2{font-size:1.5rem;}
+  .menu__grid{grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:.9rem;}
+  .dish{padding:.9rem;}
+  .dish__imgwrap{margin:-.9rem -.9rem .3rem;}
+  .dish__name{font-size:.92rem;}
+  .dish__price{font-size:.85rem;}
+  .hero{padding:2.4rem 1rem 2rem;}
+  .hero__title{font-size:1.7rem;}
 }

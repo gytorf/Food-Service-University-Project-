@@ -3,8 +3,7 @@
   margin:0 auto;
   padding:2.4rem 1.5rem 4rem;
 }
-.admin__title{font-size:1.8rem; margin-bottom:.4rem;}
-.admin__hint{color:#7a7063; font-size:.9rem; margin-bottom:2rem;}
+.admin__title{font-size:1.8rem; margin-bottom:1.6rem;}
 
 .admin__section{margin-bottom:2.6rem;}
 .admin__section h2{font-size:1.3rem; margin-bottom:.9rem;}
@@ -33,10 +32,18 @@
 .admin-table tr:last-child td{border-bottom:none;}
 .admin-table td.num{text-align:right; white-space:nowrap;}
 
+/* Невеликий підпис прямо над числом — щоб було одразу видно, що це за
+   значення (к-сть/ціна/сума/ккал), навіть не звіряючись із заголовком таблиці. */
+.cell-label{
+  display:block;
+  font-family:var(--font-display); text-transform:uppercase; letter-spacing:.03em;
+  font-size:.65rem; color:#a89c88; margin-bottom:.15rem;
+}
+
 .order-card{border:1px dashed var(--line); border-radius:4px; padding:1rem; margin-bottom:1rem;}
 .order-card:last-child{margin-bottom:0;}
 .order-card__head{
-  display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:.5rem;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem;
   margin-bottom:.6rem; font-family:var(--font-display);
 }
 .order-card__num{color:var(--tomato); font-size:1.05rem;}
@@ -47,7 +54,18 @@
   display:inline-block; background:var(--basil); color:#fff; font-size:.72rem;
   padding:.15rem .5rem; border-radius:10px; font-family:var(--font-display); text-transform:uppercase;
 }
+.order-card__status--pending{background:var(--mustard); color:var(--charcoal);}
 .order-card__total{margin-top:.6rem; text-align:right; font-family:var(--font-display); font-size:1rem;}
+
+.order-card__ready{
+  margin-left:auto;
+  background:var(--basil); color:#fff; border:none; border-radius:2px;
+  font-family:var(--font-display); text-transform:uppercase; font-size:.75rem; letter-spacing:.03em;
+  padding:.4rem .8rem; cursor:pointer;
+  transition:background .15s ease, transform .15s ease;
+}
+.order-card__ready:hover{background:#375132; transform:translateY(-1px);}
+.order-card__ready:disabled{background:#c9baa1; cursor:not-allowed; transform:none;}
 
 .pill{
   display:inline-block; font-size:.75rem; padding:.15rem .5rem; border-radius:10px;

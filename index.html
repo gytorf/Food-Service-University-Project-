@@ -119,6 +119,45 @@
   </div>
 </div>
 
+<div class="modal product-modal" id="productModal" aria-hidden="true">
+  <div class="product-modal__box">
+    <button class="modal__close product-modal__close" id="productModalClose" aria-label="Закрити">✕</button>
+    <div class="product-modal__image">
+      <img id="productModalImg" src="" alt="">
+    </div>
+    <div class="product-modal__info">
+      <p class="product-modal__cat" id="productModalCat"></p>
+      <h2 class="product-modal__name" id="productModalName"></h2>
+
+      <div class="product-modal__sizes" id="productModalSizes"></div>
+
+      <dl class="product-modal__meta">
+        <div>
+          <dt>Вага порції</dt>
+          <dd id="productModalWeight"></dd>
+        </div>
+        <div>
+          <dt>Калорійність</dt>
+          <dd><span id="productModalCalories"></span> ккал</dd>
+        </div>
+        <div>
+          <dt>Склад</dt>
+          <dd id="productModalIngredients"></dd>
+        </div>
+        <div>
+          <dt>Алергени</dt>
+          <dd id="productModalAllergens"></dd>
+        </div>
+      </dl>
+
+      <div class="product-modal__footer">
+        <span class="product-modal__price" id="productModalPrice"></span>
+        <button class="btn btn--primary" id="productModalAdd">Додати в кошик</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="db.js"></script>
 <script src="script.js"></script>
 </body>

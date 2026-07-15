@@ -24,11 +24,13 @@
 </header>
 
 <main class="admin">
-  <h1 class="admin__title">Адмін-панель · дані бази (IndexedDB)</h1>
-  <p class="admin__hint">Ці дані зберігаються локально у браузері користувача (IndexedDB), нічого не надсилається на сервер.</p>
+  <h1 class="admin__title">Адмін-панель</h1>
 
   <section class="admin__section">
-    <h2>Поточне замовлення (кошик)</h2>
+    <div class="admin__section-header">
+      <h2>Поточні замовлення</h2>
+      <span id="activeOrdersCount" class="admin__count"></span>
+    </div>
     <div id="currentOrderBox" class="admin__box">Завантаження…</div>
   </section>
 
